@@ -142,7 +142,7 @@ function BroadcastBar() {
         <div className="h-3 w-px bg-yellow-500/30" />
         <div className="overflow-hidden flex-1 h-4">
           <p
-            className={`text-xs text-gray-300 whitespace-nowrap truncate transition-all duration-400 ${
+            className={`text-xs text-gray-300 whitespace-nowrap truncate transition-all duration-[400ms] ${
               isAnimating
                 ? "opacity-0 -translate-y-3"
                 : "opacity-100 translate-y-0"

@@ -44,6 +44,7 @@ const CONFIG = {
   androidDownloadUrl: "https://app.b1yx.com/app/xLYK/JfailWgq3.apk",
   iosDownloadUrl:
     "https://shrds.xmcgcu6c55c8.top/s/upwr?key=646256376F6V4654313S7372323243343439137O34",
+  mobileAppPath: "/mobile/v3rn/dist/home",
   testTimeout: 3000,
 };
 
@@ -104,6 +105,7 @@ const promotions = [
     desc: "新注册会员首次存款即可获得超值礼金，流水仅需1倍即可提款。",
     icon: Gift,
     gradient: "from-orange-500 via-red-500 to-pink-500",
+    requiresRegistration: true,
   },
   {
     id: 2,
@@ -144,6 +146,7 @@ const promotions = [
     desc: "推荐好友注册并存款，即可获得推荐奖金。",
     icon: Sparkles,
     gradient: "from-pink-500 via-rose-500 to-red-500",
+    requiresRegistration: true,
   },
   {
     id: 6,
@@ -323,7 +326,7 @@ function LineDetectionModal({
                     <button
                       onClick={() =>
                         window.open(
-                          `https://${line.domain}/mobile/v3rn/dist/home`,
+                          `https://${line.domain}${CONFIG.mobileAppPath}`,
                           "_blank"
                         )
                       }
@@ -490,7 +493,7 @@ export default function App() {
               onClick={() => {
                 const domain = CONFIG.domains[0];
                 const url = isMobileDevice()
-                  ? `https://${domain}/mobile/v3rn/dist/home`
+                  ? `https://${domain}${CONFIG.mobileAppPath}`
                   : `https://${domain}/register.do`;
                 window.open(url, "_blank");
               }}
@@ -601,12 +604,12 @@ export default function App() {
         <div className="grid grid-cols-2 gap-2.5">
           {promotions.map((promo) => {
             const Icon = promo.icon;
-            const isRegisterPromo = promo.id === 1 || promo.id === 5;
+            const isRegisterPromo = promo.requiresRegistration === true;
             const handleApply = () => {
               if (isRegisterPromo) {
                 const domain = CONFIG.domains[0];
                 const url = isMobileDevice()
-                  ? `https://${domain}/mobile/v3rn/dist/home`
+                  ? `https://${domain}${CONFIG.mobileAppPath}`
                   : `https://${domain}/register.do`;
                 window.open(url, "_blank");
               } else {

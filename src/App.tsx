@@ -111,14 +111,22 @@ function BroadcastBar() {
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
     const timer = setInterval(() => {
       setIsAnimating(true);
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setCurrentIndex((prev) => (prev + 1) % broadcastMessages.length);
         setIsAnimating(false);
       }, 400);
     }, 3000);
-    return () => clearInterval(timer);
+
+    return () => {
+      clearInterval(timer);
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, []);
 
   return (

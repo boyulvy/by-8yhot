@@ -40,9 +40,18 @@
 
 /* 滚动条美化 */
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 6px;
+  height: 6px;
 }
 
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.7); /* subtle gray */
+  border-radius: 9999px;
+}
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

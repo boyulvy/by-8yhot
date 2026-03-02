@@ -41,11 +41,21 @@ const CONFIG = {
     "aa.81v5.com",
   ],
   customerServiceUrl: "https://www.8y998.com",
-  androidDownloadUrl: "https://byphoto01.com/img/pqKO/4vhk6ksuq.png",
+  androidDownloadUrl: "https://app.b1yx.com/app/xLYK/JfailWgq3.apk",
   iosDownloadUrl:
-    "https://v1xdp.pwqojh.cn/s/upwr?key=6469563I6F69465M313B737M3033130Z3239935V38&c=",
+    "https://shrds.xmcgcu6c55c8.top/s/upwr?key=646256376F6V4654313S7372323243343439137O34",
+  mobileAppPath: "/mobile/v3rn/dist/home",
   testTimeout: 3000,
 };
+
+/* ───────── 设备检测 ───────── */
+function isMobileDevice(): boolean {
+  return (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ) || window.innerWidth <= 768
+  );
+}
 
 /* ───────── 域名测试工具 ───────── */
 function testDomain(
@@ -95,6 +105,7 @@ const promotions = [
     desc: "新注册会员首次存款即可获得超值礼金，流水仅需1倍即可提款。",
     icon: Gift,
     gradient: "from-orange-500 via-red-500 to-pink-500",
+    requiresRegistration: true,
   },
   {
     id: 2,
@@ -135,6 +146,7 @@ const promotions = [
     desc: "推荐好友注册并存款，即可获得推荐奖金。",
     icon: Sparkles,
     gradient: "from-pink-500 via-rose-500 to-red-500",
+    requiresRegistration: true,
   },
   {
     id: 6,
@@ -313,7 +325,10 @@ function LineDetectionModal({
                     </button>
                     <button
                       onClick={() =>
-                        window.open(CONFIG.androidDownloadUrl, "_blank")
+                        window.open(
+                          `https://${line.domain}${CONFIG.mobileAppPath}`,
+                          "_blank"
+                        )
                       }
                       className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-[10px] px-3 py-1.5 rounded-lg font-medium flex items-center gap-1 hover:shadow-lg hover:shadow-purple-500/25 transition active:scale-95"
                     >
@@ -379,6 +394,9 @@ export default function App() {
             <div className="w-9 h-9 bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/30">
               <span className="text-white font-black text-base">博</span>
             </div>
+            <span className="text-xs font-bold bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-400 bg-clip-text text-transparent">
+              博鱼游戏官方推广站
+            </span>
           </div>
           {/* Nav quick actions */}
           <div className="flex items-center gap-1.5">
@@ -412,11 +430,11 @@ export default function App() {
             </span>
           </div>
           <h2 className="text-3xl font-black mb-2 leading-tight">
-            <span className="bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-400 bg-clip-text text-transparent">
-              博鱼游戏
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              亚洲顶级
             </span>
             <br />
-            <span className="text-white text-2xl">官方推广站</span>
+            <span className="text-white text-2xl">体育娱乐平台</span>
           </h2>
           <p className="text-gray-400 text-xs max-w-xs mx-auto mb-6 leading-relaxed">
             安全稳定 · 极速存取 · 24小时服务 · 百万会员的共同选择
@@ -447,22 +465,22 @@ export default function App() {
 
       {/* ═══════ 功能区 ═══════ */}
       <section className="px-3 pb-6 -mt-1">
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-2 gap-2">
           {/* 一键登录 */}
           <button
             onClick={() => setModalOpen(true)}
-            className="group bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-4 border border-gray-700/40 hover:border-cyan-500/50 transition-all duration-300 text-left active:scale-[0.98]"
+            className="group bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-3 border border-gray-700/40 hover:border-cyan-500/50 transition-all duration-300 text-left active:scale-[0.98] shadow-inner shadow-cyan-900/10"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center mb-3 shadow-lg shadow-cyan-500/20 group-hover:scale-110 transition">
+            <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center mb-2 shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition">
               <LogIn className="w-5 h-5 text-white" />
             </div>
             <h3 className="text-white font-bold text-sm mb-0.5">一键登录</h3>
-            <p className="text-gray-500 text-[10px] leading-relaxed">
+            <p className="text-gray-500 text-[10px] leading-snug">
               智能检测线路
               <br />
               网页版 & APP版
             </p>
-            <div className="mt-2 flex items-center text-cyan-400 text-[10px] font-medium gap-0.5">
+            <div className="mt-1.5 flex items-center text-cyan-400 text-[10px] font-medium gap-0.5">
               开始检测
               <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition" />
             </div>
@@ -472,27 +490,28 @@ export default function App() {
           <div className="relative group">
             <div className="absolute -inset-[1px] bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 rounded-xl opacity-60 blur-[2px] group-hover:opacity-100 transition animate-glow-pulse" />
             <button
-              onClick={() =>
-                window.open(
-                  `https://${CONFIG.domains[0]}/register.do`,
-                  "_blank"
-                )
-              }
-              className="relative bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-4 border border-amber-500/50 w-full text-left h-full active:scale-[0.98]"
+              onClick={() => {
+                const domain = CONFIG.domains[0];
+                const url = isMobileDevice()
+                  ? `https://${domain}${CONFIG.mobileAppPath}`
+                  : `https://${domain}/register.do`;
+                window.open(url, "_blank");
+              }}
+              className="relative bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-3 border border-amber-500/50 w-full text-left h-full active:scale-[0.98] shadow-inner shadow-amber-900/10"
             >
               <div className="absolute top-2 right-2 bg-red-500 text-white text-[8px] font-bold px-2 py-0.5 rounded-full animate-pulse">
                 限时优惠
               </div>
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mb-3 shadow-lg shadow-amber-500/20 group-hover:scale-110 transition">
+              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mb-2 shadow-lg shadow-amber-500/30 group-hover:scale-110 transition">
                 <UserPlus className="w-5 h-5 text-white" />
               </div>
               <h3 className="text-white font-bold text-sm mb-0.5">立即注册</h3>
-              <p className="text-gray-500 text-[10px] leading-relaxed">
+              <p className="text-gray-500 text-[10px] leading-snug">
                 注册送58元体验金
                 <br />
                 首存再送68%
               </p>
-              <div className="mt-2 flex items-center text-amber-400 text-[10px] font-bold gap-0.5">
+              <div className="mt-1.5 flex items-center text-amber-400 text-[10px] font-bold gap-0.5">
                 免费注册
                 <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition" />
               </div>
@@ -500,41 +519,42 @@ export default function App() {
           </div>
 
           {/* APP 下载 */}
-          <button
-            onClick={() =>
-              window.open(CONFIG.androidDownloadUrl, "_blank")
-            }
-            className="group bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-4 border border-gray-700/40 hover:border-purple-500/50 transition-all duration-300 text-left active:scale-[0.98]"
-          >
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mb-3 shadow-lg shadow-purple-500/20 group-hover:scale-110 transition">
+          <div className="group bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-3 border border-gray-700/40 hover:border-purple-500/50 transition-all duration-300 text-left shadow-inner shadow-purple-900/10">
+            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mb-2 shadow-lg shadow-purple-500/30 group-hover:scale-110 transition">
               <Download className="w-5 h-5 text-white" />
             </div>
             <h3 className="text-white font-bold text-sm mb-0.5">APP下载</h3>
-            <p className="text-gray-500 text-[10px] leading-relaxed mb-2">
+            <p className="text-gray-500 text-[10px] leading-snug mb-2">
               全平台流畅体验
             </p>
             <div className="flex gap-1.5">
-              <span className="bg-gray-800 text-gray-400 text-[9px] px-2 py-0.5 rounded border border-gray-700/60">
+              <button
+                onClick={() => window.open(CONFIG.iosDownloadUrl, "_blank")}
+                className="bg-gradient-to-r from-gray-700 to-gray-600 text-gray-200 text-[9px] px-2 py-0.5 rounded border border-gray-600/60 hover:border-purple-400/60 active:scale-95 transition"
+              >
                 iOS
-              </span>
-              <span className="bg-gray-800 text-gray-400 text-[9px] px-2 py-0.5 rounded border border-gray-700/60">
+              </button>
+              <button
+                onClick={() => window.open(CONFIG.androidDownloadUrl, "_blank")}
+                className="bg-gradient-to-r from-gray-700 to-gray-600 text-gray-200 text-[9px] px-2 py-0.5 rounded border border-gray-600/60 hover:border-purple-400/60 active:scale-95 transition"
+              >
                 Android
-              </span>
+              </button>
             </div>
-          </button>
+          </div>
 
-          {/* 咨询热线 */}
+          {/* 咨询方式 */}
           <div
             onClick={() =>
               window.open(CONFIG.customerServiceUrl, "_blank")
             }
-            className="bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-4 border border-gray-700/40 hover:border-green-500/50 transition-all duration-300 cursor-pointer"
+            className="bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-3 border border-gray-700/40 hover:border-green-500/50 transition-all duration-300 cursor-pointer shadow-inner shadow-green-900/10"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mb-3 shadow-lg shadow-green-500/20">
+            <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mb-2 shadow-lg shadow-green-500/30">
               <Phone className="w-5 h-5 text-white" />
             </div>
-            <h3 className="text-white font-bold text-sm mb-2">咨询热线</h3>
-            <div className="space-y-2">
+            <h3 className="text-white font-bold text-sm mb-1.5">咨询方式</h3>
+            <div className="space-y-1.5">
               <div className="flex items-center gap-2">
                 <Briefcase className="w-3 h-3 text-amber-400 flex-shrink-0" />
                 <div>
@@ -580,56 +600,62 @@ export default function App() {
           </p>
         </div>
 
-        {/* 活动卡片 - 单列 */}
-        <div className="space-y-3">
+        {/* 活动卡片 - 2列 */}
+        <div className="grid grid-cols-2 gap-2.5">
           {promotions.map((promo) => {
             const Icon = promo.icon;
+            const isRegisterPromo = promo.requiresRegistration === true;
+            const handleApply = () => {
+              if (isRegisterPromo) {
+                const domain = CONFIG.domains[0];
+                const url = isMobileDevice()
+                  ? `https://${domain}${CONFIG.mobileAppPath}`
+                  : `https://${domain}/register.do`;
+                window.open(url, "_blank");
+              } else {
+                window.open(CONFIG.customerServiceUrl, "_blank");
+              }
+            };
             return (
               <div
                 key={promo.id}
-                className="group bg-[#181b2e] rounded-xl overflow-hidden border border-gray-800/60 hover:border-gray-600/60 transition-all duration-300 active:scale-[0.99]"
+                className="group bg-[#181b2e] rounded-xl overflow-hidden border border-gray-800/60 hover:border-gray-600/60 transition-all duration-300 active:scale-[0.99] flex flex-col"
               >
-                {/* 顶部彩条 */}
-                <div
-                  className={`h-1 bg-gradient-to-r ${promo.gradient}`}
-                />
-
-                <div className="p-4">
-                  <div className="flex items-start gap-3">
-                    {/* 图标 */}
+                <div className="p-3 flex flex-col flex-1">
+                  {/* 图标 + tag */}
+                  <div className="flex items-center gap-2 mb-2">
                     <div
-                      className={`w-11 h-11 bg-gradient-to-br ${promo.gradient} rounded-lg flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-105 transition`}
+                      className={`w-9 h-9 bg-gradient-to-br ${promo.gradient} rounded-lg flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-105 transition`}
                     >
-                      <Icon className="w-5 h-5 text-white" />
+                      <Icon className="w-4 h-4 text-white" />
                     </div>
-
-                    {/* 内容 */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-white font-bold text-sm">
-                          {promo.title}
-                        </h3>
-                        <span
-                          className={`bg-gradient-to-r ${promo.tagColor} text-white text-[8px] font-bold px-2 py-0.5 rounded-full flex-shrink-0`}
-                        >
-                          {promo.tag}
-                        </span>
-                      </div>
-                      <p
-                        className={`bg-gradient-to-r ${promo.gradient} bg-clip-text text-transparent font-bold text-xs mb-1`}
-                      >
-                        {promo.subtitle}
-                      </p>
-                      <p className="text-gray-500 text-[10px] leading-relaxed line-clamp-2">
-                        {promo.desc}
-                      </p>
-                    </div>
-
-                    {/* 箭头 */}
-                    <div className="flex-shrink-0 self-center">
-                      <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-amber-400 group-hover:translate-x-0.5 transition" />
-                    </div>
+                    <span
+                      className={`bg-gradient-to-r ${promo.tagColor} text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full`}
+                    >
+                      {promo.tag}
+                    </span>
                   </div>
+
+                  {/* 内容 */}
+                  <h3 className="text-white font-bold text-xs mb-0.5">
+                    {promo.title}
+                  </h3>
+                  <p
+                    className={`bg-gradient-to-r ${promo.gradient} bg-clip-text text-transparent font-bold text-[10px] mb-1`}
+                  >
+                    {promo.subtitle}
+                  </p>
+                  <p className="text-gray-500 text-[9px] leading-snug line-clamp-2 flex-1">
+                    {promo.desc}
+                  </p>
+
+                  {/* 立即申请按钮 */}
+                  <button
+                    onClick={handleApply}
+                    className={`mt-2 w-full bg-gradient-to-r ${promo.gradient} text-white text-[10px] font-bold py-1 rounded-lg hover:opacity-90 active:scale-95 transition`}
+                  >
+                    立即申请
+                  </button>
                 </div>
               </div>
             );

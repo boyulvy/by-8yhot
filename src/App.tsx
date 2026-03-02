@@ -196,6 +196,8 @@ function LineDetectionModal({
             <span className="text-white font-bold text-sm">智能线路检测</span>
           </div>
           <button
+            type="button"
+            aria-label="关闭"
             onClick={onClose}
             className="text-white/70 hover:text-white transition"
           >
@@ -245,14 +247,14 @@ function LineDetectionModal({
                     <button
                       disabled
                       aria-disabled="true"
-                      className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-[10px] px-3 py-1.5 rounded-lg font-medium flex items-center gap-1 hover:shadow-lg hover:shadow-cyan-500/25 transition active:scale-95 opacity-60 cursor-not-allowed"
+                      className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-[10px] px-3 py-1.5 rounded-lg font-medium flex items-center gap-1 transition opacity-60 cursor-not-allowed"
                     >
                       <Globe className="w-3 h-3" /> 访问
                     </button>
                     <button
                       disabled
                       aria-disabled="true"
-                      className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-[10px] px-3 py-1.5 rounded-lg font-medium flex items-center gap-1 hover:shadow-lg hover:shadow-purple-500/25 transition active:scale-95 opacity-60 cursor-not-allowed"
+                      className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-[10px] px-3 py-1.5 rounded-lg font-medium flex items-center gap-1 transition opacity-60 cursor-not-allowed"
                     >
                       <Smartphone className="w-3 h-3" /> APP
                     </button>
@@ -626,23 +628,24 @@ export default function App() {
       {showBackTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-20 right-[calc(50%-225px+12px)] w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center shadow-xl shadow-amber-500/30 hover:scale-110 transition z-50 active:scale-95"
+          className="fixed bottom-20 right-[calc(50%_-_225px_+_12px)] w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center shadow-xl shadow-amber-500/30 hover:scale-110 transition z-50 active:scale-95"
+          aria-label="回到顶部"
         >
           <ArrowUp className="w-4 h-4 text-white" />
         </button>
       )}
 
       {/* ═══════ 浮动客服按钮 ═══════ */}
-      <div className="fixed bottom-6 left-[calc(50%-225px+12px)] z-50">
-        <button className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-xl shadow-green-500/30 hover:scale-110 transition active:scale-95 relative">
+      <div className="fixed bottom-6 left-[calc(50%_-_225px_+_12px)] z-50">
+        <button aria-label="在线客服" className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-xl shadow-green-500/30 hover:scale-110 transition active:scale-95 relative">
           <MessageCircle className="w-4 h-4 text-white" />
           <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-red-500 rounded-full border border-[#0f1020] animate-pulse" />
         </button>
       </div>
 
       {/* ═══════ 浮动在线客服 ═══════ */}
-      <div className="fixed bottom-6 right-[calc(50%-225px+12px)] z-50">
-        <button className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-xl shadow-blue-500/30 hover:scale-110 transition active:scale-95">
+      <div className="fixed bottom-6 right-[calc(50%_-_225px_+_12px)] z-50">
+        <button aria-label="联系客服" className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-xl shadow-blue-500/30 hover:scale-110 transition active:scale-95">
           <Headphones className="w-4 h-4 text-white" />
         </button>
       </div>

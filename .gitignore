@@ -1,3 +1,7 @@
 # Ignore large binary downloads
 files/downloads/*.apk
 files/downloads/*.zip
+
+# Build artifacts and dependencies
+node_modules/
+dist/

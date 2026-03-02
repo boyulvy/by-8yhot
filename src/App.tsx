@@ -5,8 +5,6 @@ import {
   Download,
   Phone,
   Headphones,
-  Briefcase,
-  ChevronRight,
   Globe,
   Smartphone,
   CheckCircle,
@@ -19,12 +17,11 @@ import {
   Clock,
   Volume2,
   X,
-  Flame,
-  Crown,
   Sparkles,
   Megaphone,
   ArrowUp,
   MessageCircle,
+  Mail,
 } from "lucide-react";
 
 /* ───────── 接口配置（自动匹配） ───────── */
@@ -100,9 +97,9 @@ const promotions = [
     id: 1,
     tag: "热门",
     tagColor: "from-red-500 to-orange-500",
-    title: "新会员首存礼金",
-    subtitle: "首存即送68%，最高领取¥8,888",
-    desc: "新注册会员首次存款即可获得超值礼金，流水仅需1倍即可提款。",
+    title: "新用户充值返利",
+    subtitle: "充值可享55%返利金，最高可领¥8,888",
+    desc: "新用户首次充值即可获得55%超值返利金。",
     icon: Gift,
     gradient: "from-orange-500 via-red-500 to-pink-500",
     requiresRegistration: true,
@@ -121,21 +118,23 @@ const promotions = [
     id: 3,
     tag: "爆款",
     tagColor: "from-yellow-500 to-amber-500",
-    title: "体育周末加码",
-    subtitle: "体育投注额外返水2.5%",
-    desc: "每周五至周日体育赛事投注享受额外返水加码。",
+    title: "三方游戏周末加码",
+    subtitle: "真人·电子·棋牌额外返水2.5%",
+    desc: "每周五至周日真人、电子、棋牌游戏投注享受额外返水加码。",
     icon: Trophy,
     gradient: "from-emerald-500 via-teal-500 to-cyan-500",
+    requiresRegistration: false,
   },
   {
     id: 4,
-    tag: "VIP",
+    tag: "限定",
     tagColor: "from-amber-400 to-yellow-300",
-    title: "VIP专属礼遇",
-    subtitle: "专属客服+生日礼金+极速提款",
-    desc: "VIP会员尊享1对1专属客服、生日礼金及优先极速提款。",
-    icon: Crown,
+    title: "限时充值加码",
+    subtitle: "13:00-18:00充值最高享10%加码",
+    desc: "每日13:00-18:00限定时段充值即享额外加码，最高10%。",
+    icon: Clock,
     gradient: "from-amber-500 via-yellow-500 to-orange-400",
+    requiresRegistration: false,
   },
   {
     id: 5,
@@ -422,24 +421,7 @@ export default function App() {
         <div className="absolute bottom-10 right-5 w-48 h-48 bg-purple-600/10 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl" />
 
-        <div className="relative px-4 pt-10 pb-8 text-center">
-          <div className="inline-flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/20 rounded-full px-3 py-1 mb-4">
-            <Flame className="w-3 h-3 text-amber-400" />
-            <span className="text-amber-400 text-[10px] font-medium">
-              亚洲最受信赖的体育娱乐平台
-            </span>
-          </div>
-          <h2 className="text-3xl font-black mb-2 leading-tight">
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              亚洲顶级
-            </span>
-            <br />
-            <span className="text-white text-2xl">体育娱乐平台</span>
-          </h2>
-          <p className="text-gray-400 text-xs max-w-xs mx-auto mb-6 leading-relaxed">
-            安全稳定 · 极速存取 · 24小时服务 · 百万会员的共同选择
-          </p>
-
+        <div className="relative px-4 pt-5 pb-4 text-center">
           {/* 统计数据 */}
           <div className="grid grid-cols-3 gap-2 mx-auto mb-2">
             {[
@@ -464,31 +446,30 @@ export default function App() {
       </section>
 
       {/* ═══════ 功能区 ═══════ */}
-      <section className="px-3 pb-6 -mt-1">
-        <div className="grid grid-cols-2 gap-2">
+      <section className="pb-4">
+        <div className="flex gap-2 overflow-x-auto px-3 pb-4 -mt-1">
           {/* 一键登录 */}
-          <button
-            onClick={() => setModalOpen(true)}
-            className="group bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-3 border border-gray-700/40 hover:border-cyan-500/50 transition-all duration-300 text-left active:scale-[0.98] shadow-inner shadow-cyan-900/10"
-          >
-            <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center mb-2 shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition">
-              <LogIn className="w-5 h-5 text-white" />
-            </div>
-            <h3 className="text-white font-bold text-sm mb-0.5">一键登录</h3>
-            <p className="text-gray-500 text-[10px] leading-snug">
-              智能检测线路
-              <br />
-              网页版 & APP版
-            </p>
-            <div className="mt-1.5 flex items-center text-cyan-400 text-[10px] font-medium gap-0.5">
-              开始检测
-              <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition" />
-            </div>
-          </button>
+          <div className="flex-shrink-0 w-[23%] min-w-[72px]">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="group bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-2 border border-gray-700/40 hover:border-cyan-500/50 transition-all duration-300 w-full text-center active:scale-[0.98]"
+            >
+              <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-1.5 shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition">
+                <LogIn className="w-4 h-4 text-white" />
+              </div>
+              <p className="text-white font-bold text-[10px] mb-1.5">一键登录</p>
+              <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-[9px] font-medium py-0.5 px-1 rounded-lg border border-cyan-400/30 shadow-md shadow-cyan-500/20 flex items-center justify-center gap-0.5">
+                开始检测
+              </div>
+            </button>
+          </div>
 
           {/* 立即注册 */}
-          <div className="relative group">
-            <div className="absolute -inset-[1px] bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 rounded-xl opacity-60 blur-[2px] group-hover:opacity-100 transition animate-glow-pulse" />
+          <div className="flex-shrink-0 w-[23%] min-w-[72px] relative pt-5">
+            <div className="absolute inset-x-0 bottom-0 top-5 -inset-x-[2px]">
+              <div className="absolute -inset-[2px] bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 rounded-xl opacity-75 blur-[3px] animate-pulse" />
+            </div>
+            <div className="absolute -top-0 left-1/2 -translate-x-1/2 animate-bounce text-base z-10" aria-hidden="true">👆</div>
             <button
               onClick={() => {
                 const domain = CONFIG.domains[0];
@@ -497,81 +478,62 @@ export default function App() {
                   : `https://${domain}/register.do`;
                 window.open(url, "_blank");
               }}
-              className="relative bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-3 border border-amber-500/50 w-full text-left h-full active:scale-[0.98] shadow-inner shadow-amber-900/10"
+              className="relative bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-2 border border-amber-500/50 w-full text-center active:scale-[0.98]"
             >
-              <div className="absolute top-2 right-2 bg-red-500 text-white text-[8px] font-bold px-2 py-0.5 rounded-full animate-pulse">
-                限时优惠
+              <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mx-auto mb-1.5 shadow-lg shadow-amber-500/30">
+                <UserPlus className="w-4 h-4 text-white" />
               </div>
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center mb-2 shadow-lg shadow-amber-500/30 group-hover:scale-110 transition">
-                <UserPlus className="w-5 h-5 text-white" />
-              </div>
-              <h3 className="text-white font-bold text-sm mb-0.5">立即注册</h3>
-              <p className="text-gray-500 text-[10px] leading-snug">
-                注册送58元体验金
-                <br />
-                首存再送68%
-              </p>
-              <div className="mt-1.5 flex items-center text-amber-400 text-[10px] font-bold gap-0.5">
+              <p className="text-white font-bold text-[10px] mb-1.5">立即注册</p>
+              <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-[9px] font-bold py-0.5 px-1 rounded-lg shadow-md flex items-center justify-center">
                 免费注册
-                <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition" />
               </div>
             </button>
           </div>
 
           {/* APP 下载 */}
-          <div className="group bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-3 border border-gray-700/40 hover:border-purple-500/50 transition-all duration-300 text-left shadow-inner shadow-purple-900/10">
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mb-2 shadow-lg shadow-purple-500/30 group-hover:scale-110 transition">
-              <Download className="w-5 h-5 text-white" />
-            </div>
-            <h3 className="text-white font-bold text-sm mb-0.5">APP下载</h3>
-            <p className="text-gray-500 text-[10px] leading-snug mb-2">
-              全平台流畅体验
-            </p>
-            <div className="flex gap-1.5">
-              <button
-                onClick={() => window.open(CONFIG.iosDownloadUrl, "_blank")}
-                className="bg-gradient-to-r from-gray-700 to-gray-600 text-gray-200 text-[9px] px-2 py-0.5 rounded border border-gray-600/60 hover:border-purple-400/60 active:scale-95 transition"
-              >
-                iOS
-              </button>
-              <button
-                onClick={() => window.open(CONFIG.androidDownloadUrl, "_blank")}
-                className="bg-gradient-to-r from-gray-700 to-gray-600 text-gray-200 text-[9px] px-2 py-0.5 rounded border border-gray-600/60 hover:border-purple-400/60 active:scale-95 transition"
-              >
-                Android
-              </button>
+          <div className="flex-shrink-0 w-[23%] min-w-[72px]">
+            <div className="group bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-2 border border-gray-700/40 hover:border-purple-500/50 transition-all duration-300 text-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mx-auto mb-1.5 shadow-lg shadow-purple-500/30 group-hover:scale-110 transition">
+                <Download className="w-4 h-4 text-white" />
+              </div>
+              <p className="text-white font-bold text-[10px] mb-1.5">APP下载</p>
+              <div className="flex gap-1">
+                <button
+                  onClick={() => window.open(CONFIG.iosDownloadUrl, "_blank")}
+                  className="flex-1 bg-[#1a1d30] text-white text-[9px] py-0.5 rounded-lg border border-purple-400/30 shadow-md hover:border-purple-400/60 active:scale-95 transition"
+                >
+                  iOS
+                </button>
+                <button
+                  onClick={() => window.open(CONFIG.androidDownloadUrl, "_blank")}
+                  className="flex-1 bg-[#1a1d30] text-white text-[9px] py-0.5 rounded-lg border border-purple-400/30 shadow-md hover:border-purple-400/60 active:scale-95 transition"
+                >
+                  Android
+                </button>
+              </div>
             </div>
           </div>
 
           {/* 咨询方式 */}
-          <div
-            onClick={() =>
-              window.open(CONFIG.customerServiceUrl, "_blank")
-            }
-            className="bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-3 border border-gray-700/40 hover:border-green-500/50 transition-all duration-300 cursor-pointer shadow-inner shadow-green-900/10"
-          >
-            <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mb-2 shadow-lg shadow-green-500/30">
-              <Phone className="w-5 h-5 text-white" />
-            </div>
-            <h3 className="text-white font-bold text-sm mb-1.5">咨询方式</h3>
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2">
-                <Briefcase className="w-3 h-3 text-amber-400 flex-shrink-0" />
-                <div>
-                  <p className="text-gray-500 text-[9px]">招商合作</p>
-                  <p className="text-white text-[11px] font-medium">
-                    QQ: 8888888
-                  </p>
-                </div>
+          <div className="flex-shrink-0 w-[23%] min-w-[72px]">
+            <div className="group bg-gradient-to-br from-[#1a1d30] to-[#1e2040] rounded-xl p-2 border border-gray-700/40 hover:border-green-500/50 transition-all duration-300 text-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-1.5 shadow-lg shadow-green-500/30 group-hover:scale-110 transition">
+                <Phone className="w-4 h-4 text-white" />
               </div>
-              <div className="flex items-center gap-2">
-                <Headphones className="w-3 h-3 text-cyan-400 flex-shrink-0" />
-                <div>
-                  <p className="text-gray-500 text-[9px]">官方客服</p>
-                  <p className="text-white text-[11px] font-medium">
-                    24/7 在线
-                  </p>
-                </div>
+              <p className="text-white font-bold text-[10px] mb-1.5">咨询方式</p>
+              <div className="flex gap-1">
+                <a
+                  href="mailto:superiorvip@126.com"
+                  className="flex-1 bg-gradient-to-r from-amber-600 to-orange-600 text-white py-1 rounded-lg border border-amber-400/30 shadow-md hover:border-amber-400/60 active:scale-95 transition flex items-center justify-center"
+                >
+                  <Mail className="w-3 h-3" />
+                </a>
+                <button
+                  onClick={() => window.open(CONFIG.customerServiceUrl, "_blank")}
+                  className="flex-1 bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-[9px] py-0.5 rounded-lg border border-cyan-400/30 shadow-md hover:border-cyan-400/60 active:scale-95 transition"
+                >
+                  客服
+                </button>
               </div>
             </div>
           </div>
@@ -694,7 +656,7 @@ export default function App() {
             {
               icon: Headphones,
               title: "全天客服",
-              desc: "24/7专业服务",
+              desc: "专业客服",
               color: "from-green-500 to-emerald-500",
             },
           ].map((item, i) => {
@@ -736,7 +698,7 @@ export default function App() {
             ))}
           </div>
           <p className="text-gray-700 text-[9px]">
-            © 2024 博鱼游戏 版权所有 · 18+
+            © 2026 博鱼游戏 版权所有 · 18+
           </p>
         </div>
       </footer>

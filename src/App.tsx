@@ -75,7 +75,7 @@ const broadcastMessages = [
   "🎉 恭喜会员 A**8 成功提款 ¥128,000！",
   "🔥 新会员首存即送68%，最高 ¥8888！",
   "🏆 会员 L**3 真人百家乐赢得 ¥56,800！",
-  "📢 博鱼体育全新改版上线，体验更流畅！",
+  "📢 博鱼游戏全新改版上线，体验更流畅！",
   "💰 恭喜会员 W**6 成功提款 ¥320,000！",
   "🎁 每日签到领取彩金，最高 ¥888！",
   "⚽ 欧冠决赛竞猜活动火热进行中！",
@@ -334,6 +334,9 @@ function LineDetectionModal({
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [showBackTop, setShowBackTop] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isInstalled, setIsInstalled] = useState(false);
+  const [showInstallGuide, setShowInstallGuide] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setShowBackTop(window.scrollY > 300);
@@ -341,8 +344,33 @@ export default function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+    if (window.matchMedia("(display-mode: standalone)").matches) {
+      setIsInstalled(true);
+    }
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleInstall = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === "accepted") {
+        setIsInstalled(true);
+      }
+      setDeferredPrompt(null);
+    } else if (!isInstalled) {
+      setShowInstallGuide(true);
+    }
+  };
+
   return (
-    <div className="w-[450px] max-w-full min-h-screen bg-[#0f1020] text-white font-sans relative shadow-2xl shadow-black/50">
+    <div className="w-full max-w-lg mx-auto min-h-screen bg-[#0f1020] text-white font-sans relative shadow-2xl shadow-black/50">
       {/* ═══════ 顶部导航栏 ═══════ */}
       <header className="bg-gradient-to-r from-[#0d0d1a] via-[#141428] to-[#0d0d1a] border-b border-gray-800/80 sticky top-0 z-40">
         <div className="flex items-center justify-between px-3 py-2.5">
@@ -351,33 +379,15 @@ export default function App() {
             <div className="w-9 h-9 bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/30">
               <span className="text-white font-black text-base">博</span>
             </div>
-            <div>
-              <h1 className="text-base font-black tracking-wide bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-400 bg-clip-text text-transparent leading-tight">
-                博鱼体育
-              </h1>
-              <p className="text-[8px] text-gray-500 tracking-[0.2em]">
-                BOYU SPORTS
-              </p>
-            </div>
           </div>
           {/* Nav quick actions */}
           <div className="flex items-center gap-1.5">
             <button
-              onClick={() => setModalOpen(true)}
-              className="flex items-center gap-1 bg-[#1e2030] text-gray-300 text-xs px-3 py-1.5 rounded-lg border border-gray-700/50 hover:border-cyan-500/50 hover:text-cyan-400 transition active:scale-95"
+              onClick={handleInstall}
+              disabled={isInstalled}
+              className="bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 text-black text-xs font-bold px-3.5 py-1.5 rounded-lg hover:shadow-lg hover:shadow-amber-500/30 transition flex items-center gap-1 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              <LogIn className="w-3.5 h-3.5" /> 登录
-            </button>
-            <button
-              onClick={() =>
-                window.open(
-                  `https://${CONFIG.domains[0]}/register.do`,
-                  "_blank"
-                )
-              }
-              className="bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 text-black text-xs font-bold px-3.5 py-1.5 rounded-lg hover:shadow-lg hover:shadow-amber-500/30 transition flex items-center gap-1 active:scale-95"
-            >
-              <UserPlus className="w-3.5 h-3.5" /> 注册
+              <Download className="w-3.5 h-3.5" /> {isInstalled ? "已添加" : "添加到桌面"}
             </button>
           </div>
         </div>
@@ -403,7 +413,7 @@ export default function App() {
           </div>
           <h2 className="text-3xl font-black mb-2 leading-tight">
             <span className="bg-gradient-to-r from-yellow-300 via-amber-400 to-orange-400 bg-clip-text text-transparent">
-              博鱼体育
+              博鱼游戏
             </span>
             <br />
             <span className="text-white text-2xl">官方推广站</span>
@@ -632,10 +642,10 @@ export default function App() {
         <h2 className="text-center text-lg font-black text-white mb-4">
           为什么选择{" "}
           <span className="bg-gradient-to-r from-yellow-300 to-amber-400 bg-clip-text text-transparent">
-            博鱼体育
+            博鱼游戏
           </span>
         </h2>
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-4 gap-2">
           {[
             {
               icon: Shield,
@@ -666,12 +676,12 @@ export default function App() {
             return (
               <div
                 key={i}
-                className="bg-[#181b2e] rounded-xl p-4 border border-gray-800/60 text-center hover:border-gray-600/60 transition group"
+                className="bg-[#181b2e] rounded-xl p-2.5 border border-gray-800/60 text-center hover:border-gray-600/60 transition group"
               >
                 <div
-                  className={`w-10 h-10 mx-auto bg-gradient-to-br ${item.color} rounded-lg flex items-center justify-center mb-2 shadow-lg group-hover:scale-110 transition`}
+                  className={`w-8 h-8 mx-auto bg-gradient-to-br ${item.color} rounded-lg flex items-center justify-center mb-2 shadow-lg group-hover:scale-110 transition`}
                 >
-                  <Icon className="w-5 h-5 text-white" />
+                  <Icon className="w-4 h-4 text-white" />
                 </div>
                 <h4 className="text-white font-bold text-xs mb-0.5">
                   {item.title}
@@ -686,14 +696,8 @@ export default function App() {
       {/* ═══════ Footer ═══════ */}
       <footer className="bg-[#0a0b14] border-t border-gray-800/60 py-6 px-4">
         <div className="text-center">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="w-7 h-7 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-black text-xs">博</span>
-            </div>
-            <span className="text-gray-400 font-bold text-sm">博鱼体育</span>
-          </div>
           <p className="text-gray-600 text-[10px] mb-3 leading-relaxed px-2">
-            博鱼体育拥有欧洲马耳他MGA及菲律宾PAGCOR双重国际认证，确保所有游戏公平、公正、公开。
+            博鱼游戏拥有欧洲马耳他MGA及菲律宾PAGCOR双重国际认证，确保所有游戏公平、公正、公开。
           </p>
           <div className="flex items-center justify-center gap-3 mb-3 flex-wrap">
             {["MGA认证", "PAGCOR认证", "SSL加密", "公平游戏"].map((t, i) => (
@@ -706,7 +710,7 @@ export default function App() {
             ))}
           </div>
           <p className="text-gray-700 text-[9px]">
-            © 2024 博鱼体育 版权所有 · 18+
+            © 2024 博鱼游戏 版权所有 · 18+
           </p>
         </div>
       </footer>
@@ -715,14 +719,14 @@ export default function App() {
       {showBackTop && (
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-20 right-[calc(50%-225px+12px)] w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center shadow-xl shadow-amber-500/30 hover:scale-110 transition z-50 active:scale-95"
+          className="fixed bottom-20 right-4 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center shadow-xl shadow-amber-500/30 hover:scale-110 transition z-50 active:scale-95"
         >
           <ArrowUp className="w-4 h-4 text-white" />
         </button>
       )}
 
       {/* ═══════ 浮动客服按钮 ═══════ */}
-      <div className="fixed bottom-6 left-[calc(50%-225px+12px)] z-50">
+      <div className="fixed bottom-6 left-4 z-50">
         <button
           onClick={() => window.open(CONFIG.customerServiceUrl, "_blank")}
           className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-xl shadow-green-500/30 hover:scale-110 transition active:scale-95 relative"
@@ -733,7 +737,7 @@ export default function App() {
       </div>
 
       {/* ═══════ 浮动在线客服 ═══════ */}
-      <div className="fixed bottom-6 right-[calc(50%-225px+12px)] z-50">
+      <div className="fixed bottom-6 right-4 z-50">
         <button
           onClick={() => window.open(CONFIG.customerServiceUrl, "_blank")}
           className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-xl shadow-blue-500/30 hover:scale-110 transition active:scale-95"
@@ -747,6 +751,30 @@ export default function App() {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
       />
+
+      {/* ═══════ PWA 安装引导弹窗 ═══════ */}
+      {showInstallGuide && (
+        <div className="fixed inset-0 bg-black/70 z-50 flex items-end justify-center">
+          <div className="w-full max-w-lg bg-[#181b2e] rounded-t-2xl p-5 border-t border-gray-700/60">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-white font-bold text-sm">如何添加到桌面</h3>
+              <button onClick={() => setShowInstallGuide(false)}>
+                <X className="w-5 h-5 text-gray-400" />
+              </button>
+            </div>
+            <div className="space-y-3 text-xs text-gray-400">
+              <div className="bg-[#0f1020] rounded-xl p-3">
+                <p className="text-white font-semibold mb-1">📱 iOS Safari</p>
+                <p>点击底部分享按钮 → 选择「添加到主屏幕」→ 点击「添加」</p>
+              </div>
+              <div className="bg-[#0f1020] rounded-xl p-3">
+                <p className="text-white font-semibold mb-1">🤖 Android Chrome</p>
+                <p>点击右上角菜单（⋮）→ 选择「添加到主屏幕」→ 点击「添加」</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

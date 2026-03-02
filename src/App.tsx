@@ -242,10 +242,18 @@ function LineDetectionModal({
                     </div>
                   </div>
                   <div className="flex gap-1.5">
-                    <button className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-[10px] px-3 py-1.5 rounded-lg font-medium flex items-center gap-1 hover:shadow-lg hover:shadow-cyan-500/25 transition active:scale-95">
+                    <button
+                      disabled
+                      aria-disabled="true"
+                      className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-[10px] px-3 py-1.5 rounded-lg font-medium flex items-center gap-1 hover:shadow-lg hover:shadow-cyan-500/25 transition active:scale-95 opacity-60 cursor-not-allowed"
+                    >
                       <Globe className="w-3 h-3" /> 访问
                     </button>
-                    <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-[10px] px-3 py-1.5 rounded-lg font-medium flex items-center gap-1 hover:shadow-lg hover:shadow-purple-500/25 transition active:scale-95">
+                    <button
+                      disabled
+                      aria-disabled="true"
+                      className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-[10px] px-3 py-1.5 rounded-lg font-medium flex items-center gap-1 hover:shadow-lg hover:shadow-purple-500/25 transition active:scale-95 opacity-60 cursor-not-allowed"
+                    >
                       <Smartphone className="w-3 h-3" /> APP
                     </button>
                   </div>

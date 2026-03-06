@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "by-8yhot",
+  "name": "boyuvhat-top",
   "compatibility_date": "2025-09-27",
   "observability": {
     "enabled": true
@@ -12,7 +12,7 @@
     "nodejs_compat"
   ],
   "routes": [
-    { "pattern": "8yhot.com", "custom_domain": true },
-    { "pattern": "www.8yhot.com", "custom_domain": true }
+    { "pattern": "boyuvhat.top", "custom_domain": true },
+    { "pattern": "www.boyuvhat.top", "custom_domain": true }
   ]
 }

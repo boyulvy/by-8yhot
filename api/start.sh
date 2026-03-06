@@ -2,7 +2,7 @@
 
 # 域名监控服务启动脚本
 
-API_DIR="/var/www/8yhot.com/8yhot.com/api"
+API_DIR="/var/www/boyuvhat.top/boyuvhat.top/api"
 PID_FILE="$API_DIR/monitor.pid"
 LOG_FILE="$API_DIR/monitor.log"
 

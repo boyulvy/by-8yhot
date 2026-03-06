@@ -34,7 +34,7 @@ const CONFIG = {
   },
   
   // 数据文件路径
-  dataPath: '/var/www/8yhot.com/8yhot.com/api/data'
+  dataPath: '/var/www/boyuvhat.top/boyuvhat.top/api/data'
 };
 
 // ========== 内存存储 ==========

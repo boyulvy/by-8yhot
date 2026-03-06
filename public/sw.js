@@ -1,7 +1,7 @@
 /* ==================== Service Worker - 缓存管理 ==================== */
 
 const CACHE_VERSION = "v1";
-const CACHE_NAME = `by-8yhot-cache-${CACHE_VERSION}`;
+const CACHE_NAME = `boyuvhat-top-cache-${CACHE_VERSION}`;
 
 const APP_SHELL = ["/", "/index.html", "/manifest.json"];
 
